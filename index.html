@@ -1,11 +1,413 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Titolo della Pagina</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riccardo Gouthier — AWS Cloud Specialist | Tecnico Informatico a Torino</title>
+  <meta name="description" content="Riccardo Gouthier, studente AWS Cloud Specialist presso ITS Academy ICT Piemonte e tecnico informatico con 7 anni di esperienza. Cloud computing, sistemi Linux/Windows, sviluppo Python. Torino, Piemonte.">
+  <meta name="keywords" content="Riccardo Gouthier, AWS Cloud Specialist, tecnico informatico Torino, cloud computing, ITS ICT Piemonte, Terraform, CloudFormation, Python developer">
+  <meta name="author" content="Riccardo Gouthier">
+  <link rel="canonical" href="https://www.riccardogouthier.it/">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Riccardo Gouthier — AWS Cloud Specialist">
+  <meta property="og:description" content="Studente AWS Cloud Specialist e tecnico informatico. Cloud, sistemi, sviluppo. Torino, Italia.">
+  <meta property="og:locale" content="it_IT">
+
+  <!-- Google Fonts: Space Grotesk (display), Inter (testo), JetBrains Mono (tecnico) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Tailwind CSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: { 950: '#0a0f1c', 900: '#101a2c', 800: '#16243a' },
+            line: { 800: '#223047' },
+            amber: { 400: '#f6c266', 500: '#f2a93b' },
+            cyan: { 400: '#4fd1c5' },
+            fog: { 200: '#e7ecf3', 400: '#9fb0c8', 600: '#64758d' }
+          },
+          fontFamily: {
+            display: ['Space Grotesk', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Foglio di stile personalizzato -->
+  <link rel="stylesheet" href="stile.css">
 </head>
-<body>
-    <h1>Ciao Mondo!</h1>
+
+<body class="font-body bg-ink-950 text-fog-200 antialiased">
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header fixed top-0 left-0 right-0 z-50">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4" aria-label="Navigazione principale">
+      <a href="#home" class="font-display text-lg font-semibold tracking-tight text-fog-200">
+        Riccardo<span class="text-amber-500">.</span>Gouthier
+      </a>
+
+      <!-- Menu desktop -->
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#chi-sono" class="nav-link">Chi Sono</a></li>
+        <li><a href="#competenze" class="nav-link">Competenze</a></li>
+        <li><a href="#contatti" class="nav-link">Contatti</a></li>
+      </ul>
+
+      <a href="#contatti" class="hidden md:inline-block cta-primary text-sm px-5 py-2 rounded-full">
+        Contattami
+      </a>
+
+      <!-- Toggle mobile -->
+      <button id="menu-toggle" class="md:hidden text-fog-200 text-xl" aria-label="Apri il menu" aria-expanded="false" aria-controls="mobile-menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </nav>
+
+    <!-- Menu mobile -->
+    <ul id="mobile-menu" class="md:hidden hidden flex-col gap-1 px-6 pb-4 text-sm font-medium">
+      <li><a href="#home" class="block py-2 nav-link">Home</a></li>
+      <li><a href="#chi-sono" class="block py-2 nav-link">Chi Sono</a></li>
+      <li><a href="#competenze" class="block py-2 nav-link">Competenze</a></li>
+      <li><a href="#contatti" class="block py-2 nav-link">Contatti</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section id="home" class="relative pt-36 pb-24 md:pt-44 md:pb-32 px-6 overflow-hidden">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+        <div>
+          <!-- Foto profilo: sostituisci "foto-profilo.jpg" con il file della tua foto
+               caricato nella stessa cartella di index.html. Finché non lo aggiungi
+               vengono mostrate le iniziali come segnaposto. -->
+          <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-amber-500 mb-6 bg-ink-900 flex items-center justify-center">
+            <img src="foto-profilo.jpg" alt="Foto di Riccardo Gouthier"
+                 class="w-full h-full object-cover"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="font-display text-2xl text-amber-500 hidden items-center justify-center w-full h-full">RG</span>
+          </div>
+          <p class="eyebrow mb-4">profilo · torino, piemonte</p>
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] mb-6">
+            Costruisco la strada tra i sistemi di oggi e il cloud di domani.
+          </h1>
+          <p class="text-fog-400 text-lg leading-relaxed mb-8 max-w-lg">
+            Sono Riccardo Gouthier, studente <span class="text-fog-200 font-medium">AWS Cloud Specialist</span> presso ITS Academy ICT Piemonte e tecnico informatico con 7 anni di esperienza sul campo. Unisco l'agilità del cloud alla solidità dei sistemi tradizionali.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mb-10">
+            <a href="#contatti" class="cta-primary px-6 py-3 rounded-full text-sm">
+              <i class="fa-solid fa-paper-plane mr-2"></i>Contattami
+            </a>
+            <a href="https://www.linkedin.com/in/riccardo-gouthier" target="_blank" rel="noopener noreferrer" class="cta-secondary px-6 py-3 rounded-full text-sm">
+              <i class="fa-brands fa-linkedin mr-2"></i>Profilo LinkedIn
+            </a>
+          </div>
+
+          <!-- Numeri chiave -->
+          <div class="flex gap-8 font-mono-label text-sm">
+            <div><span class="text-2xl text-amber-500 font-display block">7</span><span class="text-fog-600">anni in IT</span></div>
+            <div><span class="text-2xl text-amber-500 font-display block">B2</span><span class="text-fog-600">inglese (First)</span></div>
+            <div><span class="text-2xl text-amber-500 font-display block">AWS</span><span class="text-fog-600">cloud specialist</span></div>
+          </div>
+        </div>
+
+        <!-- Elemento firma: diagramma di rete animato -->
+        <div class="network-signature" aria-hidden="true">
+          <svg viewBox="0 0 480 420" class="w-full h-auto max-w-md mx-auto">
+            <!-- collegamenti -->
+            <line class="edge" x1="240" y1="210" x2="90" y2="90" />
+            <line class="edge" x1="240" y1="210" x2="390" y2="90" />
+            <line class="edge" x1="240" y1="210" x2="80" y2="320" />
+            <line class="edge" x1="240" y1="210" x2="400" y2="330" />
+            <line class="edge" x1="240" y1="210" x2="240" y2="60" />
+            <!-- impulsi animati lungo i collegamenti -->
+            <line class="pulse" x1="240" y1="210" x2="90" y2="90" stroke-dasharray="12 228" />
+            <line class="pulse" x1="240" y1="210" x2="400" y2="330" stroke-dasharray="12 228" />
+            <line class="pulse" x1="240" y1="210" x2="240" y2="60" stroke-dasharray="12 228" />
+            <!-- nodi periferici -->
+            <circle class="node" cx="90" cy="90" r="16" />
+            <circle class="node" cx="390" cy="90" r="16" />
+            <circle class="node" cx="80" cy="320" r="16" />
+            <circle class="node" cx="400" cy="330" r="16" />
+            <circle class="node" cx="240" cy="60" r="14" />
+            <!-- nodo centrale -->
+            <circle class="node node--core" cx="240" cy="210" r="26" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMPETENZE (Servizi) ============ -->
+    <section id="competenze" class="py-24 px-6 border-t border-line-800">
+      <div class="max-w-6xl mx-auto">
+        <p class="eyebrow mb-3">cosa so fare</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold mb-14 max-w-2xl">
+          Un toolkit tecnico pensato per la transizione digitale delle aziende.
+        </h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card 1 -->
+          <article class="skill-card rounded-2xl p-6">
+            <div class="icon-badge w-11 h-11 rounded-xl flex items-center justify-center mb-5 text-lg">
+              <i class="fa-brands fa-aws"></i>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Cloud & Infrastructure as Code</h3>
+            <p class="text-fog-400 text-sm leading-relaxed">Gestione risorse su AWS (VM, Storage, Networking, Functions) e provisioning con Terraform e CloudFormation.</p>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="skill-card rounded-2xl p-6">
+            <div class="icon-badge w-11 h-11 rounded-xl flex items-center justify-center mb-5 text-lg">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Sviluppo & Dati</h3>
+            <p class="text-fog-400 text-sm leading-relaxed">Python, JSON, HTML/CSS per la comunicazione frontend-backend, e gestione basi di dati con SQL Server e MySQL.</p>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="skill-card rounded-2xl p-6">
+            <div class="icon-badge w-11 h-11 rounded-xl flex items-center justify-center mb-5 text-lg">
+              <i class="fa-solid fa-server"></i>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Sistemi & Assistenza</h3>
+            <p class="text-fog-400 text-sm leading-relaxed">7 anni come tecnico informatico autonomo: Linux server (Debian), Windows 7/8/10/11, riparazione e manutenzione hardware.</p>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="skill-card rounded-2xl p-6">
+            <div class="icon-badge w-11 h-11 rounded-xl flex items-center justify-center mb-5 text-lg">
+              <i class="fa-solid fa-people-group"></i>
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">Metodo & Persone</h3>
+            <p class="text-fog-400 text-sm leading-relaxed">Lavoro di squadra, comunicazione e capacità di autogestione, costruite in 10 anni di scoutismo e ruoli a contatto con il pubblico.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CHI SONO ============ -->
+    <section id="chi-sono" class="py-24 px-6 border-t border-line-800 bg-ink-900/40">
+      <div class="max-w-6xl mx-auto grid lg:grid-cols-5 gap-14">
+
+        <div class="lg:col-span-2">
+          <p class="eyebrow mb-3">chi sono</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold mb-6">
+            Percorso pratico, testa nel cloud.
+          </h2>
+          <p class="text-fog-400 leading-relaxed mb-6">
+            Vivo a Torino e mi sto specializzando in Cloud Computing e Sistemi IT presso la Fondazione ITS ICT, con l'obiettivo di supportare la transizione digitale delle aziende attraverso soluzioni scalabili e sicure.
+          </p>
+          <p class="text-fog-400 leading-relaxed mb-8">
+            Prima di questo percorso ho lavorato per 7 anni come tecnico informatico autonomo, risolvendo problemi reali per persone reali. Ho anche fatto esperienza stagionale in ambito turistico-ricettivo e 10 anni di scoutismo con AGESCI, dove ho imparato il lavoro di squadra e la gestione di gruppo.
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+            <span class="tag-pill px-3 py-1 rounded-full">AWS</span>
+            <span class="tag-pill px-3 py-1 rounded-full">Terraform</span>
+            <span class="tag-pill px-3 py-1 rounded-full">Python</span>
+            <span class="tag-pill px-3 py-1 rounded-full">Linux</span>
+            <span class="tag-pill px-3 py-1 rounded-full">SQL</span>
+            <span class="tag-pill px-3 py-1 rounded-full">Inglese B2</span>
+          </div>
+        </div>
+
+        <!-- Percorso: formazione + esperienza in breve -->
+        <div class="lg:col-span-3">
+          <h3 class="font-display text-sm font-semibold text-fog-400 uppercase tracking-wider mb-6">Il percorso in breve</h3>
+          <ol class="space-y-8">
+            <li class="timeline-item pl-6 relative">
+              <span class="dot absolute -left-[7px] top-1.5 w-3 h-3 rounded-full"></span>
+              <p class="font-mono-label text-xs text-cyan-400 mb-1">dic 2025 – lug 2027</p>
+              <p class="font-medium">Diploma di tecnico superiore, AWS Cloud Architect</p>
+              <p class="text-fog-400 text-sm">ITS ICT Foundation for Information and Communication Technologies</p>
+            </li>
+            <li class="timeline-item pl-6 relative">
+              <span class="dot absolute -left-[7px] top-1.5 w-3 h-3 rounded-full"></span>
+              <p class="font-mono-label text-xs text-cyan-400 mb-1">gen 2019 – gen 2026</p>
+              <p class="font-medium">Tecnico informatico, autonomo</p>
+              <p class="text-fog-400 text-sm">Tecno Sistemi · 7 anni di assistenza e riparazione</p>
+            </li>
+            <li class="timeline-item pl-6 relative">
+              <span class="dot absolute -left-[7px] top-1.5 w-3 h-3 rounded-full"></span>
+              <p class="font-mono-label text-xs text-cyan-400 mb-1">set 2023 – giu 2025</p>
+              <p class="font-medium">Perito industriale, Sistemi e Reti</p>
+              <p class="text-fog-400 text-sm">Istituto Tecnico Ettore Majorana</p>
+            </li>
+            <li class="timeline-item pl-6 relative">
+              <span class="dot absolute -left-[7px] top-1.5 w-3 h-3 rounded-full"></span>
+              <p class="font-mono-label text-xs text-cyan-400 mb-1">ott 2009 – feb 2020</p>
+              <p class="font-medium">Scout, AGESCI</p>
+              <p class="text-fog-400 text-sm">Formazione e attività con il gruppo scout TOXI (Torino 11)</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTATTI ============ -->
+    <section id="contatti" class="py-24 px-6 border-t border-line-800">
+      <div class="max-w-6xl mx-auto grid lg:grid-cols-5 gap-14">
+
+        <div class="lg:col-span-2">
+          <p class="eyebrow mb-3">contatti</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold mb-6">Parliamone.</h2>
+          <p class="text-fog-400 leading-relaxed mb-8">
+            Sono aperto a opportunità in ambito cloud e sistemi IT, stage e collaborazioni. Scrivimi o usa uno dei contatti diretti qui sotto.
+          </p>
+
+          <ul class="space-y-4 text-sm">
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-envelope text-amber-500 w-5"></i>
+              <a href="mailto:riccardogouthier@gmail.com" class="text-fog-200 hover:text-amber-500 transition-colors">riccardogouthier@gmail.com</a>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-phone text-amber-500 w-5"></i>
+              <a href="tel:+393315385897" class="text-fog-200 hover:text-amber-500 transition-colors">331 538 5897</a>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-location-dot text-amber-500 w-5"></i>
+              <span class="text-fog-200">Torino, Piemonte, Italia</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Pannello contatti pubblico: nessun form, nessun servizio esterno.
+             Ogni riga mostra il dato ed è copiabile con un click. -->
+        <div class="lg:col-span-3">
+          <p class="text-fog-400 text-sm mb-5">Copia il dato che ti serve, direttamente da qui:</p>
+          <ul class="space-y-3">
+            <li class="form-field flex items-center justify-between gap-4 rounded-lg px-4 py-3.5">
+              <div class="flex items-center gap-3 min-w-0">
+                <i class="fa-solid fa-envelope text-amber-500 w-5 shrink-0"></i>
+                <div class="min-w-0">
+                  <p class="text-fog-600 text-xs font-mono-label">email</p>
+                  <p class="text-fog-200 text-sm truncate js-copy-value">riccardogouthier@gmail.com</p>
+                </div>
+              </div>
+              <button type="button" class="copy-btn shrink-0 text-fog-400 hover:text-amber-500 transition-colors" aria-label="Copia email">
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </li>
+            <li class="form-field flex items-center justify-between gap-4 rounded-lg px-4 py-3.5">
+              <div class="flex items-center gap-3 min-w-0">
+                <i class="fa-solid fa-phone text-amber-500 w-5 shrink-0"></i>
+                <div class="min-w-0">
+                  <p class="text-fog-600 text-xs font-mono-label">telefono</p>
+                  <p class="text-fog-200 text-sm truncate js-copy-value">331 538 5897</p>
+                </div>
+              </div>
+              <button type="button" class="copy-btn shrink-0 text-fog-400 hover:text-amber-500 transition-colors" aria-label="Copia numero di telefono">
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </li>
+            <li class="form-field flex items-center justify-between gap-4 rounded-lg px-4 py-3.5">
+              <div class="flex items-center gap-3 min-w-0">
+                <i class="fa-solid fa-location-dot text-amber-500 w-5 shrink-0"></i>
+                <div class="min-w-0">
+                  <p class="text-fog-600 text-xs font-mono-label">indirizzo</p>
+                  <p class="text-fog-200 text-sm truncate js-copy-value">Via Giovanni Fattori, 66, Torino, TO</p>
+                </div>
+              </div>
+              <button type="button" class="copy-btn shrink-0 text-fog-400 hover:text-amber-500 transition-colors" aria-label="Copia indirizzo">
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </li>
+            <li class="form-field flex items-center justify-between gap-4 rounded-lg px-4 py-3.5">
+              <div class="flex items-center gap-3 min-w-0">
+                <i class="fa-brands fa-linkedin text-amber-500 w-5 shrink-0"></i>
+                <div class="min-w-0">
+                  <p class="text-fog-600 text-xs font-mono-label">linkedin</p>
+                  <p class="text-fog-200 text-sm truncate js-copy-value">linkedin.com/in/riccardo-gouthier</p>
+                </div>
+              </div>
+              <button type="button" class="copy-btn shrink-0 text-fog-400 hover:text-amber-500 transition-colors" aria-label="Copia link LinkedIn">
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </li>
+          </ul>
+          <p id="copy-feedback" class="text-sm text-cyan-400 mt-4 opacity-0 transition-opacity" role="status">Copiato negli appunti.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer py-10 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <p class="text-fog-600 text-sm">&copy; <span id="year"></span> Riccardo Gouthier. Tutti i diritti riservati.</p>
+      <div class="flex items-center gap-5 text-lg">
+        <a href="https://www.linkedin.com/in/riccardo-gouthier" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Profilo LinkedIn">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <!-- Sostituisci "tuo-username" con il tuo username reale di GitHub -->
+        <a href="https://github.com/tuo-username" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Profilo GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="mailto:riccardogouthier@gmail.com" class="social-icon" aria-label="Invia una email">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Anno corrente nel footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Toggle menu mobile
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('flex');
+      mobileMenu.classList.toggle('hidden');
+      menuToggle.setAttribute('aria-expanded', isOpen);
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Copia negli appunti: nessun form, nessun servizio esterno.
+    // Ogni pulsante copia il testo della riga corrispondente.
+    const copyFeedback = document.getElementById('copy-feedback');
+    let feedbackTimeout;
+    document.querySelectorAll('.copy-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const value = btn.parentElement.querySelector('.js-copy-value').textContent.trim();
+        try {
+          await navigator.clipboard.writeText(value);
+        } catch (err) {
+          // Fallback per browser senza supporto Clipboard API
+          const tempInput = document.createElement('textarea');
+          tempInput.value = value;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+        }
+        copyFeedback.classList.remove('opacity-0');
+        clearTimeout(feedbackTimeout);
+        feedbackTimeout = setTimeout(() => copyFeedback.classList.add('opacity-0'), 2000);
+      });
+    });
+  </script>
 </body>
 </html>
