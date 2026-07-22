@@ -9,21 +9,17 @@
   <meta name="author" content="Riccardo Gouthier">
   <link rel="canonical" href="https://www.riccardogouthier.it/">
 
-  <!-- Open Graph / social sharing -->
   <meta property="og:type" content="profile">
   <meta property="og:title" content="Riccardo Gouthier — AWS Cloud Specialist">
   <meta property="og:description" content="Studente AWS Cloud Specialist e tecnico informatico. Cloud, sistemi, sviluppo. Torino, Italia.">
   <meta property="og:locale" content="it_IT">
 
-  <!-- Google Fonts: Space Grotesk (display), Inter (testo), JetBrains Mono (tecnico) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <!-- Tailwind CSS (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -46,20 +42,17 @@
     }
   </script>
 
-  <!-- Foglio di stile personalizzato -->
   <link rel="stylesheet" href="stile.css">
 </head>
 
 <body class="font-body bg-ink-950 text-fog-200 antialiased">
 
-  <!-- ============ HEADER ============ -->
   <header class="site-header fixed top-0 left-0 right-0 z-50">
     <nav class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4" aria-label="Navigazione principale">
       <a href="#home" class="font-display text-lg font-semibold tracking-tight text-fog-200">
         Riccardo<span class="text-amber-500">.</span>Gouthier
       </a>
 
-      <!-- Menu desktop -->
       <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
         <li><a href="#home" class="nav-link">Home</a></li>
         <li><a href="#chi-sono" class="nav-link">Chi Sono</a></li>
@@ -71,13 +64,11 @@
         Contattami
       </a>
 
-      <!-- Toggle mobile -->
       <button id="menu-toggle" class="md:hidden text-fog-200 text-xl" aria-label="Apri il menu" aria-expanded="false" aria-controls="mobile-menu">
         <i class="fa-solid fa-bars"></i>
       </button>
     </nav>
 
-    <!-- Menu mobile -->
     <ul id="mobile-menu" class="md:hidden hidden flex-col gap-1 px-6 pb-4 text-sm font-medium">
       <li><a href="#home" class="block py-2 nav-link">Home</a></li>
       <li><a href="#chi-sono" class="block py-2 nav-link">Chi Sono</a></li>
@@ -87,14 +78,11 @@
   </header>
 
   <main>
-    <!-- ============ HERO ============ -->
     <section id="home" class="relative pt-36 pb-24 md:pt-44 md:pb-32 px-6 overflow-hidden">
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
         <div>
-          <!-- Foto profilo: sostituisci "fotoriccurriculum.jpg" con il file della tua foto
-               caricato nella stessa cartella di index.html. Finché non lo aggiungi
-               vengono mostrate le iniziali come segnaposto. -->
+
           <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-amber-500 mb-6 bg-ink-900 flex items-center justify-center">
             <img src="fotoriccurriculum.jpg" alt="Foto di Riccardo Gouthier"
                  class="w-full h-full object-cover"
@@ -118,7 +106,6 @@
             </a>
           </div>
 
-          <!-- Numeri chiave -->
           <div class="flex gap-8 font-mono-label text-sm">
             <div><span class="text-2xl text-amber-500 font-display block">7</span><span class="text-fog-600">anni in IT</span></div>
             <div><span class="text-2xl text-amber-500 font-display block">B2</span><span class="text-fog-600">inglese (First)</span></div>
@@ -126,33 +113,33 @@
           </div>
         </div>
 
-        <!-- Elemento firma: diagramma di rete animato -->
+
         <div class="network-signature" aria-hidden="true">
           <svg viewBox="0 0 480 420" class="w-full h-auto max-w-md mx-auto">
-            <!-- collegamenti -->
+
             <line class="edge" x1="240" y1="210" x2="90" y2="90" />
             <line class="edge" x1="240" y1="210" x2="390" y2="90" />
             <line class="edge" x1="240" y1="210" x2="80" y2="320" />
             <line class="edge" x1="240" y1="210" x2="400" y2="330" />
             <line class="edge" x1="240" y1="210" x2="240" y2="60" />
-            <!-- impulsi animati lungo i collegamenti -->
+
             <line class="pulse" x1="240" y1="210" x2="90" y2="90" stroke-dasharray="12 228" />
             <line class="pulse" x1="240" y1="210" x2="400" y2="330" stroke-dasharray="12 228" />
             <line class="pulse" x1="240" y1="210" x2="240" y2="60" stroke-dasharray="12 228" />
-            <!-- nodi periferici -->
+
             <circle class="node" cx="90" cy="90" r="16" />
             <circle class="node" cx="390" cy="90" r="16" />
             <circle class="node" cx="80" cy="320" r="16" />
             <circle class="node" cx="400" cy="330" r="16" />
             <circle class="node" cx="240" cy="60" r="14" />
-            <!-- nodo centrale -->
+
             <circle class="node node--core" cx="240" cy="210" r="26" />
           </svg>
         </div>
       </div>
     </section>
 
-    <!-- ============ COMPETENZE (Servizi) ============ -->
+
     <section id="competenze" class="py-24 px-6 border-t border-line-800">
       <div class="max-w-6xl mx-auto">
         <p class="eyebrow mb-3">cosa so fare</p>
@@ -161,7 +148,7 @@
         </h2>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- Card 1 -->
+
           <article class="skill-card rounded-2xl p-6">
             <div class="icon-badge w-11 h-11 rounded-xl flex items-center justify-center mb-5 text-lg">
               <i class="fa-brands fa-aws"></i>
@@ -170,7 +157,7 @@
             <p class="text-fog-400 text-sm leading-relaxed">Gestione risorse su AWS (VM, Storage, Networking, Functions) e provisioning con Terraform e CloudFormation.</p>
           </article>
 
-          <!-- Card 2 -->
+
           <article class="skill-card rounded-2xl p-6">
             <div class="icon-badge w-11 h-11 rounded-xl flex items-center justify-center mb-5 text-lg">
               <i class="fa-solid fa-code"></i>
@@ -179,7 +166,7 @@
             <p class="text-fog-400 text-sm leading-relaxed">Python, JSON, HTML/CSS per la comunicazione frontend-backend, e gestione basi di dati con SQL Server e MySQL.</p>
           </article>
 
-          <!-- Card 3 -->
+
           <article class="skill-card rounded-2xl p-6">
             <div class="icon-badge w-11 h-11 rounded-xl flex items-center justify-center mb-5 text-lg">
               <i class="fa-solid fa-server"></i>
@@ -188,7 +175,7 @@
             <p class="text-fog-400 text-sm leading-relaxed">7 anni come tecnico informatico autonomo: Linux server (Debian), Windows 7/8/10/11, riparazione e manutenzione hardware.</p>
           </article>
 
-          <!-- Card 4 -->
+
           <article class="skill-card rounded-2xl p-6">
             <div class="icon-badge w-11 h-11 rounded-xl flex items-center justify-center mb-5 text-lg">
               <i class="fa-solid fa-people-group"></i>
@@ -200,7 +187,7 @@
       </div>
     </section>
 
-    <!-- ============ CHI SONO ============ -->
+
     <section id="chi-sono" class="py-24 px-6 border-t border-line-800 bg-ink-900/40">
       <div class="max-w-6xl mx-auto grid lg:grid-cols-5 gap-14">
 
@@ -226,7 +213,7 @@
           </div>
         </div>
 
-        <!-- Percorso: formazione + esperienza in breve -->
+
         <div class="lg:col-span-3">
           <h3 class="font-display text-sm font-semibold text-fog-400 uppercase tracking-wider mb-6">Il percorso in breve</h3>
           <ol class="space-y-8">
@@ -259,7 +246,7 @@
       </div>
     </section>
 
-    <!-- ============ CONTATTI ============ -->
+
     <section id="contatti" class="py-24 px-6 border-t border-line-800">
       <div class="max-w-6xl mx-auto grid lg:grid-cols-5 gap-14">
 
@@ -286,8 +273,7 @@
           </ul>
         </div>
 
-        <!-- Pannello contatti pubblico: nessun form, nessun servizio esterno.
-             Ogni riga mostra il dato ed è copiabile con un click. -->
+
         <div class="lg:col-span-3">
           <p class="text-fog-400 text-sm mb-5">Copia il dato che ti serve, direttamente da qui:</p>
           <ul class="space-y-3">
@@ -315,18 +301,7 @@
                 <i class="fa-regular fa-copy"></i>
               </button>
             </li>
-            <li class="form-field flex items-center justify-between gap-4 rounded-lg px-4 py-3.5">
-              <div class="flex items-center gap-3 min-w-0">
-                <i class="fa-solid fa-location-dot text-amber-500 w-5 shrink-0"></i>
-                <div class="min-w-0">
-                  <p class="text-fog-600 text-xs font-mono-label">indirizzo</p>
-                  <p class="text-fog-200 text-sm truncate js-copy-value">Via Giovanni Fattori, 66, Torino, TO</p>
-                </div>
-              </div>
-              <button type="button" class="copy-btn shrink-0 text-fog-400 hover:text-amber-500 transition-colors" aria-label="Copia indirizzo">
-                <i class="fa-regular fa-copy"></i>
-              </button>
-            </li>
+
             <li class="form-field flex items-center justify-between gap-4 rounded-lg px-4 py-3.5">
               <div class="flex items-center gap-3 min-w-0">
                 <i class="fa-brands fa-linkedin text-amber-500 w-5 shrink-0"></i>
@@ -346,7 +321,6 @@
     </section>
   </main>
 
-  <!-- ============ FOOTER ============ -->
   <footer class="site-footer py-10 px-6">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
       <p class="text-fog-600 text-sm">&copy; <span id="year"></span> Riccardo Gouthier. Tutti i diritti riservati.</p>
@@ -354,8 +328,8 @@
         <a href="https://www.linkedin.com/in/riccardo-gouthier" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Profilo LinkedIn">
           <i class="fa-brands fa-linkedin"></i>
         </a>
-        <!-- Sostituisci "tuo-username" con il tuo username reale di GitHub -->
-        <a href="https://github.com/tuo-username" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Profilo GitHub">
+
+        <a href="https://github.com/riccardogouthier-all" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Profilo GitHub">
           <i class="fa-brands fa-github"></i>
         </a>
         <a href="mailto:riccardogouthier@gmail.com" class="social-icon" aria-label="Invia una email">
@@ -366,11 +340,11 @@
   </footer>
 
   <script>
-    // Anno corrente nel footer
-    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Toggle menu mobile
-    const menuToggle = document.getElementById('menu-toggle');
+document.getElementById('year').textContent = new Date().getFullYear();
+
+
+const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     menuToggle.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.toggle('flex');
@@ -385,8 +359,7 @@
       });
     });
 
-    // Copia negli appunti: nessun form, nessun servizio esterno.
-    // Ogni pulsante copia il testo della riga corrispondente.
+
     const copyFeedback = document.getElementById('copy-feedback');
     let feedbackTimeout;
     document.querySelectorAll('.copy-btn').forEach((btn) => {
@@ -395,7 +368,7 @@
         try {
           await navigator.clipboard.writeText(value);
         } catch (err) {
-          // Fallback per browser senza supporto Clipboard API
+
           const tempInput = document.createElement('textarea');
           tempInput.value = value;
           document.body.appendChild(tempInput);
