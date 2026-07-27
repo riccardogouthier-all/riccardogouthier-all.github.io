@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP Group — Convergenza Infrastrutturale su AWS | MOSAIC GROUP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0B1B2B;
+    --navy-panel:#0F2438;
+    --navy-line:#1D3A52;
+    --paper:#F4F6F2;
+    --ink:#0B1B2B;
+    --amber:#D9822B;
+    --amber-soft:#E8A659;
+    --teal:#3FA79A;
+    --text-hi:#EDF2F4;
+    --text-lo:#8FA7B8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk', sans-serif;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  .blueprint{
+    background-color:var(--navy-deep);
+    background-image:
+      linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size:32px 32px;
+    color:var(--text-hi);
+  }
+
+  .ruler{
+    height:14px;
+    background-color:var(--navy-deep);
+    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.25) 0 1px, transparent 1px 32px);
+    border-bottom:1px solid var(--navy-line);
+  }
+
+  .hero{
+    position:relative;
+    padding:6rem 6vw 4rem;
+    overflow:hidden;
+  }
+  .hero .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--amber-soft);
+    margin:0 0 1.4rem;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 5.6vw, 4.6rem);
+    line-height:1.04;
+    font-weight:700;
+    max-width:16ch;
+    margin:0 0 1.6rem;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--amber);
+  }
+  .hero .lede{
+    max-width:56ch;
+    font-size:1.1rem;
+    color:var(--text-lo);
+    margin:0 0 3rem;
+  }
+  .title-block{
+    border:1px solid var(--navy-line);
+    background:rgba(255,255,255,0.02);
+    max-width:640px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+  }
+  .title-block .row{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    border-bottom:1px solid var(--navy-line);
+  }
+  .title-block .row:last-child{border-bottom:none;}
+  .title-block .row span, .title-block .row div{
+    padding:0.6rem 0.9rem;
+  }
+  .title-block .row span{
+    color:var(--text-lo);
+    border-right:1px solid var(--navy-line);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    font-size:0.72rem;
+  }
+  .title-block .row div{color:var(--text-hi);}
+
+  .corner-tick{
+    position:absolute;
+    width:22px;height:22px;
+    border:1px solid var(--amber-soft);
+    opacity:0.5;
+  }
+  .corner-tick.tl{top:24px;left:24px;border-right:none;border-bottom:none;}
+  .corner-tick.br{bottom:24px;right:24px;border-left:none;border-top:none;}
+
+  section{
+    padding:4.5rem 6vw;
+  }
+  section.dark{background:var(--navy-deep); color:var(--text-hi);}
+  section.light{background:var(--paper); color:var(--ink);}
+  section.panel{background:var(--navy-panel); color:var(--text-hi);}
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:1rem;
+    margin-bottom:2.4rem;
+    border-bottom:1px solid currentColor;
+    padding-bottom:1rem;
+    opacity:1;
+  }
+  .section-head .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    opacity:0.55;
+    white-space:nowrap;
+  }
+  .section-head h2{
+    font-size:clamp(1.6rem,3vw,2.3rem);
+    margin:0;
+    font-weight:600;
+  }
+
+  .grid-2{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+    gap:2.4rem;
+  }
+  .grid-3{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:1.6rem;
+  }
+
+  .company-card{
+    border:1px solid var(--navy-line);
+    background:rgba(255,255,255,0.02);
+    padding:1.8rem;
+  }
+  .company-card h3{
+    margin:0 0 0.6rem;
+    font-size:1.15rem;
+    color:var(--amber-soft);
+  }
+  .company-card p{margin:0; color:var(--text-lo); font-size:0.95rem;}
+
+  .obj-list{list-style:none; margin:0; padding:0; counter-reset:obj;}
+  .obj-list li{
+    counter-increment:obj;
+    display:grid;
+    grid-template-columns:2.6rem 1fr;
+    gap:1rem;
+    padding:1.1rem 0;
+    border-bottom:1px solid var(--navy-line);
+  }
+  .obj-list li:last-child{border-bottom:none;}
+  .obj-list li::before{
+    content:counter(obj,decimal-leading-zero);
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--amber);
+    font-size:0.95rem;
+    padding-top:0.1rem;
+  }
+
+  .issue-card{
+    background:var(--paper);
+    color:var(--ink);
+    border:1px solid #d8d9d2;
+    padding:1.6rem;
+    position:relative;
+  }
+  .issue-card .n{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--amber);
+    letter-spacing:0.1em;
+  }
+  .issue-card h3{
+    font-size:1.05rem;
+    margin:0.5rem 0 0.7rem;
+  }
+  .issue-card ul{
+    margin:0.6rem 0 0;
+    padding-left:1.1rem;
+    font-size:0.88rem;
+    color:#3d4a52;
+  }
+
+  .team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1.4rem;
+  }
+  .team-card{
+    border-left:3px solid var(--amber);
+    padding:0.4rem 0 0.4rem 1.2rem;
+  }
+  .team-card h4{margin:0 0 0.2rem; font-size:1rem;}
+  .team-card .role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--text-lo);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:0.5rem;
+  }
+  .team-card ul{margin:0; padding-left:1.1rem; font-size:0.86rem; color:var(--text-lo);}
+
+  .diagram-frame{
+    border:1px solid var(--navy-line);
+    background:#fff;
+    padding:0.6rem;
+  }
+  .diagram-frame img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  .diagram-caption{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--text-lo);
+    margin-top:0.6rem;
+    letter-spacing:0.04em;
+  }
+
+  .spec-strip{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:1px;
+    background:var(--navy-line);
+    border:1px solid var(--navy-line);
+    margin:2rem 0;
+  }
+  .spec{
+    background:var(--navy-deep);
+    padding:1.2rem 1rem;
+  }
+  .spec .val{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1.5rem;
+    color:var(--amber-soft);
+    display:block;
+  }
+  .spec .lbl{
+    font-size:0.72rem;
+    color:var(--text-lo);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+
+  table.cost{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.92rem;
+    margin:1.4rem 0 0.6rem;
+  }
+  table.cost caption{
+    text-align:left;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--text-lo);
+    margin-bottom:0.6rem;
+  }
+  table.cost th, table.cost td{
+    border-bottom:1px solid var(--navy-line);
+    padding:0.65rem 0.8rem;
+    text-align:left;
+  }
+  table.cost th{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--text-lo);
+    font-weight:500;
+  }
+  table.cost td.num, table.cost th.num{text-align:right; font-family:'IBM Plex Mono', monospace;}
+  table.cost tr.total td{
+    font-weight:600;
+    color:var(--amber-soft);
+    border-top:2px solid var(--amber);
+    border-bottom:none;
+  }
+  section.light table.cost th, section.light table.cost td{border-color:#d8d9d2;}
+  section.light table.cost th{color:#6b7a83;}
+  section.light table.cost tr.total td{color:#B5651D;}
+
+  details.tech{
+    border:1px solid var(--navy-line);
+    margin-bottom:0.9rem;
+    background:rgba(255,255,255,0.015);
+  }
+  details.tech > summary{
+    cursor:pointer;
+    list-style:none;
+    padding:1.1rem 1.4rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    font-weight:600;
+    font-size:1.02rem;
+  }
+  details.tech > summary::-webkit-details-marker{display:none;}
+  details.tech > summary::after{
+    content:"+";
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--amber);
+    font-size:1.3rem;
+    line-height:1;
+  }
+  details.tech[open] > summary::after{content:"−";}
+  details.tech .body{
+    padding:0 1.4rem 1.6rem;
+    color:var(--text-lo);
+    font-size:0.95rem;
+  }
+  details.tech .body p{margin:0 0 1rem;}
+  details.tech .body ul{padding-left:1.2rem;}
+  details.tech .body strong{color:var(--text-hi);}
+
+  /* ---------- totals hero ---------- */
+  .totals{
+    text-align:center;
+    padding:5rem 6vw;
+  }
+  .totals .figure{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:clamp(2.6rem,7vw,5.5rem);
+    color:var(--amber);
+    font-weight:600;
+    line-height:1;
+  }
+  .totals .figure small{
+    font-size:0.35em;
+    color:var(--text-lo);
+    display:block;
+    margin-top:0.6rem;
+    font-family:'IBM Plex Sans', sans-serif;
+    letter-spacing:0.02em;
+  }
+  .totals-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:1px;
+    background:var(--navy-line);
+    border:1px solid var(--navy-line);
+    max-width:900px;
+    margin:3rem auto 0;
+  }
+  .totals-grid .cell{
+    background:var(--navy-deep);
+    padding:1.6rem 1rem;
+  }
+  .totals-grid .cell .amt{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1.4rem;
+    color:var(--text-hi);
+  }
+  .totals-grid .cell .lbl{
+    font-size:0.78rem;
+    color:var(--text-lo);
+    margin-top:0.3rem;
+  }
+
+  .toggle-model{
+    display:flex;
+    justify-content:center;
+    gap:0.5rem;
+    margin:2.5rem 0 0;
+  }
+  .toggle-model button{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    letter-spacing:0.04em;
+    padding:0.6rem 1.1rem;
+    background:transparent;
+    border:1px solid var(--navy-line);
+    color:var(--text-lo);
+    cursor:pointer;
+  }
+  .toggle-model button.active{
+    color:var(--navy-deep);
+    background:var(--amber);
+    border-color:var(--amber);
+  }
+
+  footer{
+    padding:2.5rem 6vw;
+    background:var(--navy-deep);
+    color:var(--text-lo);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    display:flex;
+    flex-wrap:wrap;
+    gap:1rem;
+    justify-content:space-between;
+    border-top:1px solid var(--navy-line);
+  }
+
+  @media (max-width:640px){
+    .hero{padding:4.5rem 5vw 3rem;}
+    section{padding:3rem 5vw;}
+    .title-block .row{grid-template-columns:120px 1fr;}
+  }
+
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline:2px solid var(--amber);
+    outline-offset:2px;
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="ruler"></div>
+
+<header class="hero blueprint">
+  <div class="corner-tick tl"></div>
+  <div class="corner-tick br"></div>
+  <p class="eyebrow">Proposta di progetto — MOSAIC GROUP</p>
+  <h1>Convergenza infrastrutturale di <em>TP&nbsp;Group</em> su AWS</h1>
+  <p class="lede">Dalla fusione tra Thema Consulting e Pro Studio nasce TP Group. Tre interventi — cluster HPC, unificazione degli strumenti, potenziamento di Pondus — ricostruiscono l'infrastruttura su AWS in vista di ISO/IEC 27001.</p>
+
+  <div class="title-block">
+    <div class="row"><span>Progetto</span><div>ACA — Learning by Project, Soft &amp; Tech Skills, TP Group</div></div>
+    <div class="row"><span>Cliente</span><div>TP Group (Thema Consulting + Pro Studio)</div></div>
+    <div class="row"><span>Data</span><div>29/07/2026</div></div>
+    <div class="row"><span>Team</span><div>MOSAIC GROUP — 5 membri</div></div>
+    <div class="row"><span>Offerta</span><div>631.500 USD · 556.000 EUR (impegno 3 anni)</div></div>
+  </div>
+</header>
+
+<section class="light" id="panoramica">
+  <div class="section-head">
+    <span class="tag">01 — Panoramica</span>
+    <h2>Due aziende, un'unica infrastruttura</h2>
+  </div>
+  <div class="grid-2">
+    <div>
+      <p>Due aziende attive nella progettazione automotive e aerospace si alleano per rispondere a un mercato sempre più orientato a soluzioni tecnologiche avanzate. Dalla loro unione nasce <strong>TP Group</strong>. La fase di integrazione coinvolge pesantemente tutti i sistemi informativi, oggetto di questo progetto. Con la fusione, il contratto di locazione di Pro Studio non viene rinnovato: i dipendenti si trasferiscono presso la sede di Thema Consulting.</p>
+    </div>
+    <div class="grid-3" style="grid-column:1/-1; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+      <div class="issue-card">
+        <span class="n">Azienda A</span>
+        <h3>Thema Consulting srl</h3>
+        <p style="margin:0;color:#3d4a52;font-size:0.9rem;">Fondata a fine anni '90 da tre ingegneri progettisti con un decennio di esperienza in progettazione meccanica. Focus: progettazione strutturale automotive.</p>
+      </div>
+      <div class="issue-card">
+        <span class="n">Azienda B</span>
+        <h3>Pro Studio srl</h3>
+        <p style="margin:0;color:#3d4a52;font-size:0.9rem;">Startup nata nel 2023, composta da giovani ingegneri progettisti attivi in ambito aerospace.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark blueprint" id="obiettivi">
+  <div class="section-head">
+    <span class="tag">02 — Obiettivi</span>
+    <h2>Tre obiettivi, un vincolo normativo</h2>
+  </div>
+  <div class="grid-2">
+    <ul class="obj-list">
+      <li><div><strong>Potenziamento di Pondus</strong><br>Miglioramenti funzionali, ottimizzazioni prestazionali e distribuzione dell'applicazione verso un'utenza più ampia.</div></li>
+      <li><div><strong>Espansione del cluster di calcolo</strong><br>Incremento di 8 nodi entro 2 anni, uso riservato alle risorse interne. Niente VM né container. Nodi con 2 processori (&ge;24 core), rete Ethernet + Infiniband 100/200 Gbps, 8 GB RAM/core, no GPU, Linux, 1,6 TB di scratch per nodo.</div></li>
+      <li><div><strong>Conformità ISO/IEC 27001</strong><br>Business continuity (ridondanza dei sistemi strategici), disaster recovery (delocalizzazione dei backup), sicurezza degli accessi (cifratura, protocolli sicuri, VPN).</div></li>
+    </ul>
+    <div>
+      <div class="spec-strip" style="margin-top:0;">
+        <div class="spec"><span class="val">580k€</span><span class="lbl">Budget on-premise/hosting + IVA</span></div>
+        <div class="spec"><span class="val">525k€</span><span class="lbl">Budget on-cloud (noleggio) + IVA</span></div>
+      </div>
+      <p style="color:var(--text-lo); font-size:0.92rem;">Il budget indicato dal cliente confronta l'acquisto di nodi di calcolo proprietari con una soluzione a noleggio cloud, a conferma della direzione presa dalla proposta tecnica.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="team">
+  <div class="section-head">
+    <span class="tag">03 — MOSAIC GROUP</span>
+    <h2>Cinque membri, un solo corso ACA</h2>
+  </div>
+  <p style="color:var(--text-lo); max-width:70ch; margin-top:-1rem;">Il gruppo è composto da cinque membri afferenti al corso ACA (AWS Cloud Architect). Il lavoro è suddiviso per garantire efficienza, qualità e controllo incrociato su tutte le attività.</p>
+  <div class="team-grid" style="margin-top:2rem;">
+    <div class="team-card">
+      <h4>Alessandro Verduna</h4>
+      <div class="role">Team Leader</div>
+      <ul>
+        <li>Coordinamento generale e distribuzione attività</li>
+        <li>Compliance ISO 27001 di Pondus</li>
+        <li>Co-progettazione HPC</li>
+        <li>Auditing trasversale, calcolo costi</li>
+      </ul>
+    </div>
+    <div class="team-card">
+      <h4>Matteo Pironato</h4>
+      <div class="role">Responsabile Progettazione HPC</div>
+      <ul>
+        <li>Progettazione infrastruttura HPC</li>
+        <li>Auditing su Pondus</li>
+        <li>Calcolo dei costi</li>
+      </ul>
+    </div>
+    <div class="team-card">
+      <h4>Riccardo Gouthier</h4>
+      <div class="role">Responsabile Progettazione Pondus</div>
+      <ul>
+        <li>Progettazione della piattaforma Pondus</li>
+        <li>Auditing HPC, calcolo costi</li>
+        <li>Tematiche ISO relative a Pondus</li>
+        <li>Adeguamento della LAN</li>
+      </ul>
+    </div>
+    <div class="team-card">
+      <h4>Yousef Abdelmoneim</h4>
+      <div class="role">Co‑Responsabile System Integration</div>
+      <ul>
+        <li>Integrazione dei sistemi</li>
+        <li>Calcolo dei costi</li>
+        <li>Auditing su HPC e Pondus</li>
+      </ul>
+    </div>
+    <div class="team-card">
+      <h4>Cristian Torres</h4>
+      <div class="role">Co‑Responsabile System Integration</div>
+      <ul>
+        <li>Integrazione dei sistemi</li>
+        <li>Calcolo dei costi</li>
+        <li>Auditing su HPC e Pondus</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="tematiche">
+  <div class="section-head">
+    <span class="tag">04 — Tematiche riscontrate</span>
+    <h2>Cinque aree di intervento prioritarie</h2>
+  </div>
+  <div class="grid-3">
+    <div class="issue-card">
+      <span class="n">Area 01</span>
+      <h3>Espansione della capacità di calcolo</h3>
+      <ul>
+        <li>Gestione di carichi crescenti</li>
+        <li>Supporto a nuovi servizi</li>
+        <li>Riduzione dei tempi di elaborazione</li>
+      </ul>
+    </div>
+    <div class="issue-card">
+      <span class="n">Area 02</span>
+      <h3>Adeguamento della LAN e segmentazione vLAN</h3>
+      <ul>
+        <li>Resilienza e sicurezza</li>
+        <li>Organizzazione dei domini di rete</li>
+        <li>Preparazione a futuri ampliamenti</li>
+      </ul>
+    </div>
+    <div class="issue-card">
+      <span class="n">Area 03</span>
+      <h3>Unificazione dello stack tecnologico</h3>
+      <ul>
+        <li>Riduzione della complessità operativa</li>
+        <li>Migliore collaborazione tra team</li>
+        <li>Tracciabilità dei processi di sviluppo</li>
+      </ul>
+    </div>
+    <div class="issue-card">
+      <span class="n">Area 04</span>
+      <h3>Predisposizione ai controlli ISO/IEC 27001</h3>
+      <ul>
+        <li>Gestione dei rischi</li>
+        <li>Controlli di sicurezza</li>
+        <li>Documentazione e audit</li>
+      </ul>
+    </div>
+    <div class="issue-card">
+      <span class="n">Area 05</span>
+      <h3>Potenziamento e distribuzione di Pondus</h3>
+      <ul>
+        <li>Scalabilità del servizio</li>
+        <li>Maggiore valore per gli utenti</li>
+        <li>Allineamento alla crescita aziendale</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="dark blueprint" id="proposta">
+  <div class="section-head">
+    <span class="tag">05 — Proposta tecnica</span>
+    <h2>Come i cinque interventi prendono forma</h2>
+  </div>
+
+  <details class="tech" open>
+    <summary>Espansione della capacità di calcolo — Cluster HPC su AWS</summary>
+    <div class="body">
+      <p>Thema Consulting opera oggi con un unico data center on-premise, "piccolo, efficiente, ma poco capiente": i due armadi rack sono saturi e non consentono alcuna espansione fisica, pur restando funzionali per l'attività ordinaria. La proposta prevede un <strong>cluster HPC autonomo su AWS</strong>, affiancato al data center locale senza sostituirlo, con head node e scheduler dedicati. Regione: <strong>eu-west-1 (Irlanda)</strong>, per vicinanza geografica, bassa latenza e disponibilità delle istanze HPC più recenti.</p>
+
+      <div class="diagram-frame">
+        <img src="assets/schema-hpc.jpg" alt="Schema architetturale del cluster HPC su AWS">
+      </div>
+      <p class="diagram-caption">Schema HPC — architettura del cluster su AWS</p>
+
+      <p style="margin-top:1.4rem;">Dodici nodi <strong>EC2 hpc7g.4xlarge</strong> (16 vCPU, 128 GB RAM ciascuno), connettività a 200 Gbps con Elastic Fabric Adapter (EFA) equivalente a Infiniband, in placement group dedicato su subnet privata. Storage di scratch su <strong>FSx for Lustre</strong> (0,075 TB/CPU, sopra il minimo richiesto di 0,066 TB/CPU). Head node basato su Slurm, sempre attivo, che accende i nodi di calcolo solo in presenza di job. Monitoraggio via CloudWatch/CloudTrail, accessi tramite ruoli IAM a privilegio minimo, risultati archiviati su S3.</p>
+
+      <div class="spec-strip">
+        <div class="spec"><span class="val">12</span><span class="lbl">Nodi di calcolo</span></div>
+        <div class="spec"><span class="val">192</span><span class="lbl">vCPU totali</span></div>
+        <div class="spec"><span class="val">1536</span><span class="lbl">GB RAM totali</span></div>
+        <div class="spec"><span class="val">14,4</span><span class="lbl">TB scratch (FSx Lustre)</span></div>
+        <div class="spec"><span class="val">200</span><span class="lbl">Gbps EFA</span></div>
+      </div>
+
+      <table class="cost">
+        <caption>Tabella costi HPC — EC2 Savings Plans, 3 anni</caption>
+        <thead><tr><th>Componente</th><th>Configurazione</th><th class="num">Totale 3 anni ($)</th><th class="num">Totale 3 anni (€)</th></tr></thead>
+        <tbody>
+          <tr><td>EC2 hpc7g.4xlarge</td><td>12 istanze, Savings Plans, ~11.000 $/mese, Irlanda</td><td class="num">400.000</td><td class="num">—</td></tr>
+          <tr><td>FSx for Lustre</td><td>Scratch, 1,2 TB/nodo, 2.220 $/mese per 12 nodi</td><td class="num">80.000</td><td class="num">—</td></tr>
+          <tr><td>Head node / scheduler</td><td>c8gn.8xlarge, upfront 3 anni, sempre acceso</td><td class="num">20.500</td><td class="num">—</td></tr>
+          <tr class="total"><td colspan="2">TOTALE HPC (vs. 576.000 $ a on-demand)</td><td class="num">500.500</td><td class="num">440.000</td></tr>
+        </tbody>
+      </table>
+      <p>Punto di pareggio fra Savings Plans e on-demand: <strong>~70% di utilizzo del cluster</strong>. Sotto tale soglia conviene l'on-demand, sopra conviene l'impegno triennale.</p>
+    </div>
+  </details>
+
+  <details class="tech">
+    <summary>Adeguamento della LAN e segmentazione vLAN</summary>
+    <div class="body">
+      <p>La fornitura hardware riguarda esclusivamente l'infrastruttura di rete locale: server, storage e calcolo sono interamente demandati ai servizi cloud (Google Workspace, Odoo SaaS, Bitbucket SaaS, MediaWiki su GCP, AWS IAM Identity Center). L'adeguamento della LAN comprende:</p>
+      <ul>
+        <li>Sostituzione degli apparati non compatibili con segmentazione, vLAN, QoS e gestione centralizzata</li>
+        <li>Switch gestiti con vLAN dedicate per traffico amministrativo, postazioni utente, infrastruttura e servizi locali residui</li>
+        <li>Postazioni con connettività cablata/wireless conforme (1 Gbps o superiore)</li>
+        <li>Migrazione della topologia di rete mantenendo la stessa distribuzione di carico</li>
+        <li>Sicurezza perimetrale con firewall coerenti col modello cloud-first e MFA obbligatoria via IAM Identity Center</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="tech">
+    <summary>Unificazione dello stack tecnologico</summary>
+    <div class="body">
+      <p>Posta, produttività, videoconferenza, archiviazione file, CRM, contabilità, time sheet, controllo versione, documentazione e autenticazione sono oggi duplicati fra Thema Consulting e Pro Studio, con soluzioni eterogenee e ridondate. La proposta converge dieci ambiti di servizio su un unico stack, con <strong>AWS IAM Identity Center</strong> come broker di identità centrale (SAML 2.0, OpenID Connect, SCIM, MFA obbligatoria).</p>
+      <ul>
+        <li><strong>Google Workspace</strong> — posta, calendario, produttività, drive, videoconferenza (elimina Zimbra, MS365, LibreOffice, MS Teams, NextCloud)</li>
+        <li><strong>MediaWiki</strong> — mantenuto self-hosted su GCP, continuità documentale</li>
+        <li><strong>Odoo SaaS</strong> — sostituisce SugarCRM, Profis, Kimai per CRM, contabilità e rilevamento ore</li>
+        <li><strong>Bitbucket SaaS</strong> — controllo versione e CI/CD, sostituisce GiTea</li>
+        <li><strong>AWS IAM Identity Center</strong> — federazione SAML verso Google Workspace, OIDC verso Odoo, provisioning SCIM</li>
+      </ul>
+      <p>Il software legacy <strong>Profis</strong> resta in sola lettura su un'istanza EC2 per un anno (compliance finanziaria), poi dismesso.</p>
+      <p><strong>Governance AWS:</strong> AWS Organizations con OU dedicate — OU-HPC, OU-Pondus, OU-Shared-Services, OU-Security — protette da Service Control Policies, con tagging obbligatorio per tracciabilità granulare dei costi per servizio, OU e team.</p>
+
+      <table class="cost">
+        <caption>Tabella costi System Integration</caption>
+        <thead><tr><th>Voce</th><th>Dettaglio</th><th class="num">Costo annuo (€)</th></tr></thead>
+        <tbody>
+          <tr><td>Google Workspace</td><td>Standard, 50 dipendenti</td><td class="num">8.160</td></tr>
+          <tr><td>Odoo</td><td>Standard, 10 dipendenti</td><td class="num">1.428</td></tr>
+          <tr><td>Bitbucket</td><td>Standard, 40 dipendenti</td><td class="num">1.920</td></tr>
+          <tr><td>MediaWiki</td><td>Free, hosting su GCP</td><td class="num">—</td></tr>
+          <tr><td>IAM Identity Center</td><td>Free</td><td class="num">—</td></tr>
+          <tr><td>Profis (compliance)</td><td>Attivo 1 anno, una tantum</td><td class="num">—</td></tr>
+          <tr><td>Backup (locale + S3)</td><td>Cifrato e ridondato</td><td class="num">100</td></tr>
+          <tr class="total"><td colspan="2">TOTALE ANNUO / 3 ANNI</td><td class="num">11.600 / 35.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details class="tech">
+    <summary>Predisposizione ai controlli ISO/IEC 27001</summary>
+    <div class="body">
+      <p>La strategia di backup e Disaster Recovery si applica a <strong>Pondus</strong>, unico servizio esposto all'esterno:</p>
+      <ul>
+        <li>Backup giornalieri con replica cross-region e Availability Zone differenti</li>
+        <li>Cifratura dei backup in transito e a riposo, chiavi gestite via AWS KMS</li>
+        <li>Disponibilità annua obiettivo: <strong>95%</strong></li>
+        <li>Test periodici di ripristino, documentati e verificabili</li>
+      </ul>
+      <p>Il <strong>cluster HPC</strong> è escluso dalla strategia di backup avanzata: uso interno, dati di scratch non persistenti, nessun requisito di compliance o continuità operativa. Solo i risultati dei job, già su S3, sono persistenti.</p>
+    </div>
+  </details>
+
+  <details class="tech">
+    <summary>Potenziamento e distribuzione di Pondus</summary>
+    <div class="body">
+      <p>Pondus viene ricostruita integralmente su AWS con architettura ridondata e scalabile. Accesso utenti tramite <strong>Application Load Balancer</strong> con terminazione HTTPS (AWS Certificate Manager, rinnovo automatico), affiancato da <strong>Route 53</strong> (DNS, routing, failover), <strong>AWS WAF</strong> (protezione da SQL injection, XSS, bot) e <strong>AWS Shield</strong> (mitigazione DDoS).</p>
+
+      <div class="diagram-frame">
+        <img src="assets/schema-pondus.jpg" alt="Schema architetturale dell'applicazione Pondus su AWS">
+      </div>
+      <p class="diagram-caption">Schema Pondus — architettura applicativa su AWS</p>
+
+      <p style="margin-top:1.4rem;">Livello applicativo: istanza <strong>EC2 m6i.4xlarge</strong> (16 vCPU, 64 GB RAM), con una seconda istanza identica in altra Availability Zone attivabile per alta disponibilità. Livello dati: <strong>Amazon Aurora</strong> (MySQL/PostgreSQL) Multi-AZ, istanza primaria db.r5.2xlarge, storage gp3 da 1,2 TB, backup 2 TB. Migrazione dati via <strong>AWS DMS</strong>, credenziali su <strong>AWS Secrets Manager</strong>, accesso amministrativo via <strong>Systems Manager Session Manager</strong> (niente chiavi SSH). Osservabilità con CloudWatch e CloudTrail, backup replicati cross-region.</p>
+
+      <table class="cost">
+        <caption>Stima costi — Architettura Pondus su AWS, 3 anni</caption>
+        <thead><tr><th>Componente</th><th>Configurazione</th><th class="num">Totale 3 anni ($)</th><th class="num">Totale 3 anni (€)</th></tr></thead>
+        <tbody>
+          <tr><td>EC2 m6i.4xlarge</td><td>16 vCPU, 64 GB RAM, 2 istanze, upfront, Stoccolma</td><td class="num">17.000</td><td class="num">15.000</td></tr>
+          <tr><td>RDS Aurora DB</td><td>db.r5.2xlarge, 8 vCPU, 64 GB RAM, storage gp3 1,2 TB, backup 2 TB, Stoccolma</td><td class="num">75.000</td><td class="num">66.000</td></tr>
+          <tr class="total"><td colspan="2">TOTALE PONDUS</td><td class="num">92.000</td><td class="num">81.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</section>
+
+<section class="totals blueprint" id="totali">
+  <div class="section-head" style="justify-content:center; border:none;">
+    <span class="tag">06 — Stima complessiva</span>
+  </div>
+  <p class="figure">556.000 €<small>equivalenti a 631.500 $ — impegno triennale (modello EC2 Savings Plan)</small></p>
+
+  <div class="totals-grid">
+    <div class="cell"><div class="amt">500.500 $ / 440.000 €</div><div class="lbl">Cluster HPC (Savings Plans)</div></div>
+    <div class="cell"><div class="amt">40.000 $ / 35.000 €</div><div class="lbl">System Integration</div></div>
+    <div class="cell"><div class="amt">92.000 $ / 81.000 €</div><div class="lbl">Pondus su AWS</div></div>
+  </div>
+
+  <p style="max-width:60ch; margin:2.5rem auto 0; color:var(--text-lo); font-size:0.95rem;">Nel <strong>modello on-demand</strong>, System Integration e Pondus restano stabili; solo l'HPC varia in base all'utilizzo previsto del cluster: sotto il 70% conviene l'on-demand, sopra conviene l'EC2 Savings Plan.</p>
+</section>
+
+<section class="panel" id="pianificazione">
+  <div class="section-head">
+    <span class="tag">07 — Pianificazione e responsabilità</span>
+    <h2>Gantt di progetto e matrice RACI</h2>
+  </div>
+  <div class="diagram-frame">
+    <img src="assets/gantt-raci.jpg" alt="Gantt di progetto e tabella RACI">
+  </div>
+  <p class="diagram-caption">Gantt di progetto e RACI Table — pianificazione temporale e responsabilità per attività</p>
+</section>
+
+<footer>
+  <span>MOSAIC GROUP — Alessandro Verduna · Cristian Torres · Matteo Pironato · Yousef Abdelmoneim · Riccardo Gouthier</span>
+  <span>Proposta di progetto — 29/07/2026</span>
+</footer>
+
+</body>
+</html>
